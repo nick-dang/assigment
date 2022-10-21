@@ -26,9 +26,9 @@ for y in range(image_height):
         (r, g, b, _) = image.get_at((x, y)) #check RGB value of pixel
         
         #cacl # of circles for red, green and blue
-        a = int(r/60)
-        c = int(g/60)
-        d = int(b/60)
+        a = int(r/50)
+        c = int(g/50)
+        d = int(b/50)
 
         if x == 0 and y ==0: #check left corner pixel
             if (r,g, b, _) == (250,45, 208): #check if that pixel is magenta
