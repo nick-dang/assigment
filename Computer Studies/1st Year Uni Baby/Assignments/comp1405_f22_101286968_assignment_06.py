@@ -3,6 +3,7 @@
 #Description: create a board game similar to snake and ladder 
 #board game features: "Ladder connection" & "snake connection"
 
+
 import pygame
 import random
 
@@ -117,8 +118,6 @@ while True: #check if players reach the end of board game
                     player1SquaresLeft = diceValue- player1SquaresLeft -1 #amount of move right after move up 1 row
                     
                     player1CurrentPos = (player1CurrentPos-1)+7*player1SquaresLeft
-
-                    
 
                     ply1_y_pos = [squares[player1CurrentPos][1]+20, squares[player1CurrentPos]] #move up 1 row
                     ply1_x_pos = [squares[player1CurrentPos][0]+20, squares[player1CurrentPos]]
