@@ -2,7 +2,13 @@
 #Nick Dang
 #Description: create a board game similar to snake and ladder 
 #board game features: "Ladder connection" & "snake connection"
-
+#ladder (based on assigned array of each square from loop):
+#1. square[20] to square[32] 
+#2. square[11] to square[30]
+#3. square[40] to square[35]
+#snakes:
+#1. square[18] to square[13]
+#2. square[21] square[16]
 
 import pygame
 import random
