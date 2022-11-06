@@ -13,22 +13,37 @@
 import pygame
 import random
 
-#method for rolling 2 6-sided dice 
+#method for rolling 2 4-sided dice 
 def die():
     diceValue = random.randint(1,8)
     return diceValue
 
+
+
 #method to draw grid
 def grid():
+    colour_white = (255,255,255)
+    colour_black = (0,0,0)
+    current_colour = colour_white
     for i in range(8): #loop for x-axis
         for j in range(7): #for y-axis
-            squares.append(pygame.draw.rect(screen, (0,0,0), (i*squareWidth, j*squareHeight, squareWidth,squareHeight), width=1))
+            squares.append(pygame.draw.rect(screen, current_colour, (i*squareDim, j*squareDim, squareDim,squareDim)))
+            
+            
+            if current_colour == colour_white:
+                current_colour = colour_black
+            else:
+                current_colour = colour_white
+    if current_colour == colour_white:
+        current_colour = colour_black
+    else:  
+        current_colour = colour_white
 
 
 
 #window & grid dimension
-squareWidth = 80
-squareHeight= 80
+squareDim = 80
+
 winWid = 640
 winHeight = 560
 
@@ -37,6 +52,7 @@ screen = pygame.display.set_mode((winWid, winHeight))
 
 #array for squares
 squares = []
+screen.fill((127,127,127))
 grid()
 
 player1CurrentPos = 6 #player 1 starting square
