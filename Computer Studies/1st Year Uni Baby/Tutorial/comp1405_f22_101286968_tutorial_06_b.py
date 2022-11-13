@@ -11,7 +11,7 @@ user_list = [] #empty list
 
 user_int = int(input("Please enter an int for list: ")) 
 
-
+#method to count a particular string
 def string_to_count():
     counter = 0
     if input("Would you like to count a particular string? Y/N ").lower() == 'y':
@@ -29,6 +29,7 @@ for i in range (user_int): #randomized the #s inside the list
 
 while True:
     print(user_list)
+    
     if input("Exit: Y/N ").lower() == 'y':
         break
 
