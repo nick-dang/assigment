@@ -1,6 +1,6 @@
 #nick dang
 #101286968
-#description: 
+#description: a simple text adventure game. Can go around the map to collect items and switch between 1st and 2nd floor when step into elevator. 
 
 import pygame
 from random import shuffle
