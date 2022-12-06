@@ -16,13 +16,22 @@ def first_func(list):
     return list
 
 def second_func(list):
-    if (list[0]%2) == 1:
-        list[0] += 10
+    a = 0 
+    b = 1
+    if list == []:
+        return list 
     else:
         #simplify 
         
-        simplified = list[1:]
+         #store the 1st value of the list into a variable for later checking if it's odd or even
+        simplified = list[a]
+        print(simplified)
+        
+        recursive = second_func(list[a+1]) #go through every number 
+        
 
     return list
 
-print(first_func([1,2,3]))
+
+list = [1,2,3]
+second_func(list)
