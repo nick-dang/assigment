@@ -16,22 +16,23 @@ def first_func(list):
     return list
 
 def second_func(list):
-    a = 0 
-    b = 1
-    if list == []:
-        return list 
+    if list == []: #simply solution is when the list has nothing and return an empty list
+        result = []
+        
     else:
-        #simplify 
-        
-         #store the 1st value of the list into a variable for later checking if it's odd or even
-        simplified = list[a]
-        print(simplified)
-        
-        recursive = second_func(list[a+1]) #go through every number 
-        
+        simplified = list[1:] #slice the list 
 
-    return list
+        recursive = second_func(simplified) #recursive call 
+        result = recursive
+        if list[0] % 2 == 1: #check if value is odd then add 10
+            result.insert(0,list[0] + 10) 
+        else:
+            result.insert(0, list[0]) 
+    return result
 
 
-list = [1,2,3]
-second_func(list)
+list = [3,65,2,3,4]
+
+print(second_func(list))
+
+
