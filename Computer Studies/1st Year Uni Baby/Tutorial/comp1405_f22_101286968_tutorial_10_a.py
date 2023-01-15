@@ -27,7 +27,7 @@ def second_func(list):
         simplified = list[a]
         print(simplified)
         
-        recursive = second_func(list[a+1]) #go through every number 
+        
         
 
     return list
