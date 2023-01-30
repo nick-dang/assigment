@@ -1,3 +1,7 @@
+/*Nick Dang
+ * 101286968
+ * 
+ */
 public class Store {
     public static final int MAX_CUSTOMERS = 500;
     private String name;
@@ -30,7 +34,7 @@ public class Store {
         }
         return sum / customerCount;
     }
-
+    
     public Customer richestCustomer() {
         Customer currentCustomer = customers[0];
         for (int i = 0; i < customerCount - 1; i++) {

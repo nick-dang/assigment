@@ -1,3 +1,7 @@
+/*Nick Dang
+ * 101286968
+ * Description: Customer's object
+ */
 public class Customer {
     private String name;
     private int age;
