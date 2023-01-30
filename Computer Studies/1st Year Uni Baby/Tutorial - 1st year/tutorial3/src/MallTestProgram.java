@@ -1,3 +1,7 @@
+/*Nick Dang
+ * 101286968
+ * 
+ */
 public class MallTestProgram {
     public static void main(String args[]) {
         // Make the mall

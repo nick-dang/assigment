@@ -1,3 +1,7 @@
+/*Nick Dang
+ * 101286968
+ * 
+ */
 public class StoreTestProgram {
     public static void main(String args[]) {
         Customer[] result;

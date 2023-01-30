@@ -1,3 +1,7 @@
+/*Nick Dang
+ * 101286968
+ * 
+ */
 public class Mall {
     public static final int MAX_STORES = 100;
     private String name;
