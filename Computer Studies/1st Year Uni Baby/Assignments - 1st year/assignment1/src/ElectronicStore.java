@@ -31,7 +31,7 @@ public class ElectronicStore {
     public boolean searchStock(String search) {
         search = search.toLowerCase();
         for (int i = 0; i < maxItem; i++) {
-            if (desktop[i].toString().toLowerCase().contains(search)
+            if (desktop[i].toString().toLowerCase().contains(search) //search for the key word in each product
                     || laptop[i].toString().toLowerCase().contains(search)
                     || fridge[i].toString().toLowerCase().contains(search)) {
                 return true;
