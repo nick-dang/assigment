@@ -6,11 +6,10 @@ public class ElectronicStoreTester {
         store.printStock();
 
         Scanner search = new Scanner(System.in);
-        String prompt = "";
         
         while (true){
             System.out.print("Enter a search word: ");
-            prompt = search.nextLine();
+            String prompt = search.nextLine();
             if (prompt.equalsIgnoreCase("quit")){
                 break;
             }
