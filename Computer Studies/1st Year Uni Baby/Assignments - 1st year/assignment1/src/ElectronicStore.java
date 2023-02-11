@@ -1,4 +1,3 @@
-
 public class ElectronicStore {
     String name;
     static int maxItem = 3;
@@ -26,6 +25,7 @@ public class ElectronicStore {
         for (int i = 0; i < maxItem; i++) {
             System.out.print(desktop[i] + "\n" + laptop[i] + "\n" + fridge[i] + "\n");
         }
+       
     }
 
     public boolean searchStock(String search) {

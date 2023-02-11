@@ -1,13 +1,16 @@
-import javax.swing.JOptionPane;
+import java.util.Scanner;
 
 public class ElectronicStoreTester {
     public static void main(String[] args) {
         ElectronicStore store = new ElectronicStore("walmart");
         store.printStock();
 
+        Scanner search = new Scanner(System.in);
+        String prompt = "";
         
         while (true){
-            String prompt = JOptionPane.showInputDialog(null, "Enter a search word");
+            System.out.print("Enter a search word: ");
+            prompt = search.nextLine();
             if (prompt.equalsIgnoreCase("quit")){
                 break;
             }
