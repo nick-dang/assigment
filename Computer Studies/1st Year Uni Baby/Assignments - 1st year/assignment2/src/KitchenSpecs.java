@@ -1,4 +1,4 @@
-public class KitchenSpecs extends Product{
+public abstract class KitchenSpecs extends Product{
     int wattage;
     String color;
     String brand;

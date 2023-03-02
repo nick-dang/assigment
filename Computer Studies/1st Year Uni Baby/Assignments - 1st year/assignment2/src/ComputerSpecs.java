@@ -1,4 +1,4 @@
-public class ComputerSpecs extends  Product{
+public abstract class ComputerSpecs extends  Product{
     double cpuSpeed;
     int ram;
     boolean ssd;
