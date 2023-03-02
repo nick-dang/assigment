@@ -1,20 +1,19 @@
-public class Fridge {
-    double fridgeSize;
-    boolean freezer; 
-    String colour; 
+public class Fridge extends KitchenSpecs{
+    private boolean hasFreezer;
 
-    public Fridge (double fridgeSize, boolean freezer, String colour){
-        this.fridgeSize = fridgeSize;
-        this.freezer = freezer;
-        this.colour = colour;
+    public Fridge (double price, int quantity, int wattage, String color, String brand, boolean hasFreezer){
+        super(price,quantity, wattage, color, brand);
+        this.hasFreezer = hasFreezer;
     }
 
-    public String toString(){
-        String name = this.fridgeSize + " cubic foot Fridge ";
 
-        if (freezer){
-            return name + "with Freezer (" + colour + ")";
+    public String toString(){
+
+        if (hasFreezer){
+            return brand + " Fridge with Freezer (" + color + ", " + wattage + " watts) " +
+                    "(" + price + " dollars each, " + stockQuantity + " in stock, " + soldQuantity + " sold)";
         }
-        return name + "(" + colour + ")";
+        return brand + " Fridge (" + color + ", " + wattage + " watts) " +
+                "(" + price + " dollars each, " + stockQuantity + " in stock, " + soldQuantity + " sold)";
     }
 }
