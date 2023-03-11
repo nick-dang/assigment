@@ -1,29 +1,28 @@
 import java.util.*;
-public class MusicExchangeCenter {
+public class MusicExchangeCenter  {
     private  List<User> users;
     private Map<String,Float> royalties;
     private List<Song> downloadedSongs;
 
     public MusicExchangeCenter(){
-
-        downloadedSongs = new ArrayList<Song>();
-        users = new ArrayList<User>();
+        royalties = new HashMap<>();
+        downloadedSongs = new ArrayList<>();
+        users = new ArrayList<>();
     }
     public void displayRoyalties(){
-        /*float money = 0;
-        List<String> artistName = new ArrayList<String>();
-        for (Song s: allAvailableSongs()){
-            for (Song g: allAvailableSongs()){
-                if (s.getArtist().equals(g.getArtist())){
-                    royalties.put(s.getArtist(),money+=0.25);
-                }
-            }
-            System.out.println( "$"+String.format("%1.2f%20s",royalties.get(s.getArtist()),s.getArtist()));
-            money = 0;
-        }*/
+        for(Pair<Integer,Song> pair: songsByPopularity() ){
+            float money = pair.getKey()*0.25f;
+            String artistName = pair.getValue().getArtist();
+            royalties.put(artistName, royalties.get(artistName)+money);
+        }
+        System.out.println("Amount   Artist\n----------------");
+        for (Map.Entry<String,Float> entry: royalties.entrySet()){
+            System.out.println("$"+String.format("%-8.2f%-10s",entry.getValue(),entry.getKey()));
+        }
     }
+
     public List<User> onlineUsers(){
-        List<User> online = new ArrayList<User>();
+        List<User> online = new ArrayList<>();
         for (User u: users){
             if (u.isOnline()){
                 online.add(u);
@@ -33,12 +32,10 @@ public class MusicExchangeCenter {
     }
 
     public List<Song> allAvailableSongs(){
-        List<Song> allSongs = new ArrayList<Song>();
+        List<Song> allSongs = new ArrayList<>();
         for (User u: users){
             if (u.isOnline()){
-                for (Song s: u.getSongList()){
-                    allSongs.add(s);
-                }
+                allSongs.addAll(u.getSongList());
             }
         }
         return allSongs;
@@ -66,7 +63,7 @@ public class MusicExchangeCenter {
     }
 
     public List<Song> availableSongsByArtist (String artist){
-        List<Song> artistSongs = new ArrayList<Song>();
+        List<Song> artistSongs = new ArrayList<>();
 
         for (Song s: allAvailableSongs()){
             if(s.getArtist().equalsIgnoreCase(artist)){
@@ -79,45 +76,37 @@ public class MusicExchangeCenter {
     public Song getSong(String title, String ownerName) {
         for (User u : onlineUsers()) {
             if (u.getUserName().equals(ownerName)) {
-                for (Song s : u.getSongList()) {
-                    if (s.getTitle().equals(title)) {
-                        downloadedSongs.add(s);
-
-                        return s;
-                    }
+                Song s = u.songWithTitle(title);
+                if (s != null) {
+                    downloadedSongs.add(s);
+                    royalties.put(s.getArtist(),0f);
+                    return s;
                 }
             }
-
         }
         return null;
     }
 
     public TreeSet<Song> uniqueDownloads(){
-        TreeSet<Song> listOfSortSongs = new TreeSet<Song>();
-        for (Song s: allAvailableSongs()){
-            listOfSortSongs.add(s);
-        }
-        return listOfSortSongs;
+        return new TreeSet<>(downloadedSongs);
     }
 
-    public ArrayList<Pair> songsByPopularity(){
-        ArrayList<Pair> pair = new ArrayList<Pair>();
-
-        int counter = 0;
+    public ArrayList<Pair<Integer,Song>> songsByPopularity(){
+        ArrayList<Pair<Integer,Song>> listOfPair = new ArrayList<>();
+        for (Song s: uniqueDownloads()){
+            listOfPair.add(new Pair<>(0,s));
+        }
         for (Song s: downloadedSongs){
-            for (Song g: downloadedSongs){
-                if (s.getTitle().equals(g)){
-                    counter++;
-
+            for (Pair<Integer, Song> pair : listOfPair) {
+                if (s.equals(pair.getValue())) {
+                    pair.setKey(pair.getKey() + 1);
+                    break;
                 }
             }
-            pair.add(new Pair(counter,s));
         }
-        return pair;
+        listOfPair.sort((p1, p2) -> p2.getKey() - p1.getKey());
+        return listOfPair;
     }
 
-    public int compare(Pair<Integer, Song> p1, Pair<Integer, Song> p2) {
-        return p1.getKey()-p2.getKey();
-    }
 
 }

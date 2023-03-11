@@ -19,13 +19,11 @@ public class User {
   public boolean isOnline() { return online; }
 
   public void addSong (Song s){
-    if (!(this == null)) {
-      songList.add(s);
-    }
+    songList.add(s);
   }
 
   public List<String> requestCompleteSonglist(MusicExchangeCenter m){
-    List<String> list = new ArrayList<String>();
+    List<String> list = new ArrayList<>();
     list.add(String.format("%-33s%-15s%10s%15s","TITLE","ARTIST","TIME","OWNER") + "\n");
     int counter = 1;
     for (User u: m.onlineUsers()){
@@ -38,7 +36,7 @@ public class User {
   }
 
   public List<String> requestSonglistByArtist(MusicExchangeCenter m, String artist){
-    List<String> list = new ArrayList<String>();
+    List<String> list = new ArrayList<>();
     list.add(String.format("%-33s%-15s%10s%15s","TITLE","ARTIST","TIME","OWNER") + "\n");
     int counter = 1;
     for (User u: m.onlineUsers()){
@@ -52,23 +50,20 @@ public class User {
     return list;
   }
 
-  public boolean songWithTitle(String title){
+  public Song songWithTitle(String title){
     for (Song s: songList){
       if(s.getTitle().equals(title)){
-        return true;
+        return s;
       }
     }
-    return false;
+    return null;
   }
 
   public void downloadSong(MusicExchangeCenter m, String title, String ownerName){
-    if(!(null == m.getSong(title, ownerName))){
-      System.out.println("NULL");
-      songList.add(m.getSong(title,ownerName));
-
+    Song s = m.getSong(title, ownerName);
+    if(s != null){
+      songList.add(s);
     }
-
-
   }
   public int totalSongTime(){
     int sum = 0;

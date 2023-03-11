@@ -49,20 +49,20 @@ public class MusicExchangeTestProgram3 {
       System.out.println(s);
     }
 
-//    // Display the downloaded songs alphabetically
-//    System.out.println("\nHere are the unique downloaded songs alphabetically: ");
-//    for (Song s: mec.uniqueDownloads()){
-//      System.out.println(s);
-//    }
-//
-//    // Display the downloaded songs in order of popularity
-//    System.out.println("\nHere are the downloaded songs by populariry: ");
-//    for (Pair<Integer,Song> p: mec.songsByPopularity()){
-//      System.out.println("(" + p.getKey() + " downloads) " + p.getValue());
-//    }
-//
-//    // Display the royalties
-//    System.out.println("\nHere are the royalties:\n");
-//    mec.displayRoyalties();
+    // Display the downloaded songs alphabetically
+    System.out.println("\nHere are the unique downloaded songs alphabetically: ");
+    for (Song s: mec.uniqueDownloads()){
+      System.out.println(s);
+    }
+
+    // Display the downloaded songs in order of popularity
+    System.out.println("\nHere are the downloaded songs by popularity: ");
+    for (Pair<Integer,Song> p: mec.songsByPopularity()){
+      System.out.println("(" + p.getKey() + " downloads) " + p.getValue());
+    }
+
+    // Display the royalties
+    System.out.println("\nHere are the royalties:\n");
+    mec.displayRoyalties();
   }
 }
