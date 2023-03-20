@@ -1,3 +1,7 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class Store {
   public static final int MAX_CUSTOMERS = 500;
   private static int LATEST_ID = 100000;
@@ -69,5 +73,25 @@ public class Store {
       }
     }
     return friends;
+  }
+
+  public void saveTo(DataOutputStream aFile) throws IOException {
+    for (Customer cus: customers){
+      if (cus != null){
+        cus.saveTo(aFile);
+      }
+
+    }
+  }
+
+  public static Store readFrom(DataInputStream aFile) throws IOException
+  {
+    Store s = new Store("?");
+    while (aFile.available() > 0) {
+      //Now read in a customer from the file and add him/her to the store
+
+      s.addCustomer(Customer.readFrom(aFile));
+    }
+    return s;
   }
 }

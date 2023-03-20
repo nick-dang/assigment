@@ -1,3 +1,7 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class Customer {
     private String      name;
     private int         age; 
@@ -21,8 +25,24 @@ public class Customer {
     
     public String getName() { return name; }
     public int getAge(){return age;}
+    public float getMoney (){return money;}
+    public int getId(){return id;}
     
     public boolean hasMoreMoneyThan(Customer c) {
       return money > c.money;
+    }
+
+    public void saveTo(DataOutputStream aFile) throws IOException {
+        aFile.writeUTF(name);
+        aFile.writeInt(age);
+        aFile.writeFloat(money);
+        aFile.writeInt(id);
+
+    }
+
+    public static Customer readFrom(DataInputStream aFile) throws IOException {
+        Customer customer = new Customer(aFile.readUTF(), aFile.readInt(), aFile.readFloat());
+        customer.setID(aFile.readInt());
+        return customer;
     }
 }

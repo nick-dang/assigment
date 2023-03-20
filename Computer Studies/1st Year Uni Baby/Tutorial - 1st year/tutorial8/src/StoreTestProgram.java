@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class StoreTestProgram {
     public static void main(String args[]) {
         Customer[]    result;
@@ -33,24 +35,45 @@ public class StoreTestProgram {
 
         System.out.println("Here are the customers:\n");
         walmart.listCustomers();
-        
+
         // Find average Customer age
-System.out.println("\nAverage age of customers: " + walmart.averageCustomerAge());
+        System.out.println("\nAverage age of customers: " + walmart.averageCustomerAge());
 
 // Find richest customer
-System.out.println("\nRichest customer is: " + walmart.richestCustomer());
+        System.out.println("\nRichest customer is: " + walmart.richestCustomer());
 
 // Find friends for Amie
-System.out.println("\n\nFriends for 18 year old Omar:");
-result = walmart.friendsFor(walmart.getCustomers()[14]);
-for (Customer c:  result) System.out.println(c);
+        System.out.println("\n\nFriends for 18 year old Omar:");
+        result = walmart.friendsFor(walmart.getCustomers()[14]);
+        for (Customer c:  result) System.out.println(c);
 
 // Find friends for Brad
-System.out.println("\n\nFriends for 14 year old Amie:");
-result = walmart.friendsFor(walmart.getCustomers()[0]);
-for (Customer c:  result) System.out.println(c);
+        System.out.println("\n\nFriends for 14 year old Amie:");
+        result = walmart.friendsFor(walmart.getCustomers()[0]);
+        for (Customer c:  result) System.out.println(c);
 
-
-
+        try {
+            DataOutputStream out = new DataOutputStream(new FileOutputStream("store.txt"));
+            walmart.saveTo(out);
+            out.close();
+        } catch (FileNotFoundException e) {
+            // Do Nothing
+        } catch (IOException e) {
+            // Do Nothing
+        }
+        try {
+            DataInputStream in = new DataInputStream(new FileInputStream("store.txt"));
+            walmart = Store.readFrom(in);
+            in.close();
+        } catch (FileNotFoundException e) {
+            // Do Nothing
+        } catch (IOException e) {
+            // Do Nothing
+        }
+        System.out.println("\n\nHere are the customers from the file's Store object:");
+        walmart.listCustomers();
     }
+
+
+
 }

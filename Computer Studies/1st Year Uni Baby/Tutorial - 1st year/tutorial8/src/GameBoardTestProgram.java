@@ -30,15 +30,24 @@ public class GameBoardTestProgram {
 
         // Add a Ball
         Ball ball = new Ball(new Point2D(3, 11));
-        ball.speed = 5;
+        ball.speed = 6;
         ball.direction = 0;
         g.add(ball);
 
         // Make some updates, displaying the board each time ...
         for (int i=0; i<15; i++) {
-            g.updateObjects();
-            g.displayBoard();
-            System.out.println("--------------------");
+            try {
+                g.displayBoard();
+                System.out.println("--------------------");
+                g.updateObjects();
+            }
+            catch (CollisionException e) {
+                System.out.println("*** " + e.getMessage() + " ... setting speed to 0");
+                e.source.speed = 0;
+                e.source.location = e.source.getPreviousLocation();
+                System.out.println(player);
+
+            }
         }
     }
 }

@@ -31,9 +31,25 @@ public class Game {
         for (int i=0; i<objectCount; i++)
             System.out.println(gameObjects[i]);
     }
-    public void updateObjects() {
+    public void updateObjects() throws CollisionException{
         for (int i=0; i<objectCount; i++)
             gameObjects[i].update();
+        ArrayList<MovableObject> movableObject = getMovableObjects();
+        ArrayList<Wall> walls = getWalls();
+        for (Wall w: walls) {
+
+            for (MovableObject m: movableObject) {
+                if (w.contains(m.location)){
+
+                    System.out.println(w);
+                    throw new CollisionException(m);
+                }
+
+
+
+
+            }
+        }
     }
 
     // Return an array of all Harmful objects in the game
@@ -63,5 +79,22 @@ public class Game {
 
     public void displayBoard() {
         gameBoard.display(this);
+    }
+
+    public ArrayList<MovableObject> getMovableObjects() {
+        ArrayList<MovableObject> result = new ArrayList<MovableObject>();
+        for (GameObject g: gameObjects) {
+            if (g instanceof MovableObject)
+                result.add((MovableObject)g);
+        }
+        return result;
+    }
+    public ArrayList<Wall> getWalls() {
+        ArrayList<Wall> result = new ArrayList<Wall>();
+        for (GameObject g: gameObjects) {
+            if (g instanceof Wall)
+                result.add((Wall)g);
+        }
+        return result;
     }
 }
