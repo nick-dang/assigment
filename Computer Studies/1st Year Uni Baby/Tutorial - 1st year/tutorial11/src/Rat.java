@@ -1,5 +1,5 @@
 public class Rat {
-    private int	row, col;
+    private int	row, col, numOfSpace=0;
 
     // Move the Rat to the given position
     public void moveTo(int r, int c) {
@@ -57,5 +57,57 @@ public class Rat {
 
         // We tried all directions and did not find the cheese, so quit
         return false;
+    }
+
+    public int freeSpaces(Maze m){
+        // Return true if there is cheese at the rat's (row,col) in the maze
+        if (m.cheeseAt(row, col))
+            return 1;
+
+        // Return false if there is a wall at the rat's (row,col) in the maze
+        if (m.wallAt(row, col) || m.hasBeenVisited(row, col))
+            return -1;
+
+        // Mark this location as having been visited
+        m.markVisited(row, col);
+        numOfSpace++;
+        // Move up in the maze and recursively check
+        moveTo(row-1, col);
+        if (freeSpaces(m) == 1) {
+            moveTo(row+1, col);   // Move back down before marking
+
+            return 1;
+        }
+        moveTo(row+1, col);   // Move back down before marking
+
+        // Move below in the maze and recursively check
+        moveTo(row+1, col);
+        if (freeSpaces(m)==1) {
+            moveTo(row-1, col);   // Move back up before marking
+
+            return 1;
+        }
+        moveTo(row-1, col);   // Move back up before marking
+
+        // Move left in the maze and recursively check
+        moveTo(row, col-1);
+        if (freeSpaces(m) == 1) {
+            moveTo(row, col+1);   // Move back right before marking
+
+            return 1;
+        }
+        moveTo(row, col+1);   // Move back right before marking
+
+        // Move right in the maze and recursively check
+        moveTo(row, col+1);
+        if (freeSpaces(m) == 1) {
+            moveTo(row, col-1);   // Move back left before marking
+
+            return 1;
+        }
+        moveTo(row, col-1);   // Move back left before marking
+
+        // We tried all directions and did not find the cheese, so quit
+        return numOfSpace;
     }
 }

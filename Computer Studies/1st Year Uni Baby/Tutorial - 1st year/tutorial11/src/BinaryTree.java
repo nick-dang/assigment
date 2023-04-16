@@ -61,6 +61,24 @@ public class BinaryTree {
     }
 
     public boolean isTheSameAs(BinaryTree t) {
-        return false;  //. Replace this code with your own
+        if (data == null && t.getData() == null){ //check the base case of when both trees are empty
+            return true;
+        }
+        if (data != null && t.getData() != null){ //check that the datas aren't null
+            //check the data of the trees from the left nodes to the right nodes
+            return (data.equalsIgnoreCase(t.getData()) && leftChild.isTheSameAs(t.leftChild) && rightChild.isTheSameAs(t.rightChild));
+        }
+        return false;
+    }
+
+    public boolean contains(String d){
+        if (data == null){
+            return false;
+        }
+        if (data.equalsIgnoreCase(d)){
+            return true;
+        }
+        if (leftChild.contains(d)) return true; //check the left nodes first
+        return rightChild.contains(d); //if searched string is not found, go through the right nodes
     }
 }

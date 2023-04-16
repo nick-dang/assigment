@@ -141,16 +141,21 @@ public class LinkedList {
     }
 
     public boolean isInIncreasingOrder() {
-        return isInIncreasingOrder(head);  //. Replace this code with your own
-    }
+        return isInIncreasingOrder(head);  }
 
-    public boolean isInIncreasingOrder(Item startItem){
-        if (startItem == null){
-            return false;
-        }
-        if (startItem.data < startItem.next.data){
+    private boolean isInIncreasingOrder(Item startItem){
+        if (startItem == null  || (startItem.previous == null && startItem.next ==null)){
             return true;
         }
-        return isInIncreasingOrder(startItem.next);
+        else if(startItem.next != null){
+            if (startItem.data < startItem.next.data){
+                return isInIncreasingOrder(startItem.next);
+            }
+            else{
+                return false;
+            }
+        }
+       return true;
+
     }
 }
