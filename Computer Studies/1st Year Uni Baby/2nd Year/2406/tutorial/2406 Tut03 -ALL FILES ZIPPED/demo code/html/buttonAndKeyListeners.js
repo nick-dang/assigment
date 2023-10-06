@@ -72,8 +72,39 @@ function handleSubmitButton() {
         console.log("typeof: " + typeof this.responseText)
         //we are expecting the response text to be a JSON string
         let responseObj = JSON.parse(this.responseText)
-        movingString.word = responseObj.text
+        console.log(responseObj.songLines)
+        song = responseObj.songLines
+        
+        
+        if(responseObj.text === "NOT FOUND: " + userText){
+          movingString.word = responseObj.text
+        }else{
+          movingString.word = "FOUND"
+          let line = ''
+          let ch = ''
+          let word_store = []
+          for (let i = 0; i < song.length; i++){
+            line = song[i]
+            let space_index = 0
+            let start_index = 0
+            
+            for (let j = 0; j < line.length; j++){
 
+              ch = line.charAt(j)
+              if (ch === ' '){
+                space_index = j
+                word_store.push(line.substring(start_index, space_index))
+                start_index = j+1
+              }else if(j === line.length - 1){
+                word_store.push(line.substring(start_index))
+                
+              }
+            }
+          }
+          set_words(word_store)
+          randomizeWordLocation()
+
+        }
 
         drawCanvas()
       }

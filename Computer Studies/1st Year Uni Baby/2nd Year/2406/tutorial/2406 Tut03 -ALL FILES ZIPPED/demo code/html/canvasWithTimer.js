@@ -23,9 +23,25 @@ server via POST message sending JSON data
 //DATA MODELS
 //Use javascript array of objects to represent words and their locations
 let words = []
+
 words.push({word: "I", x: 50, y: 50})
 words.push({word: "like", x: 70, y: 50})
 words.push({word: "javascript", x: 120, y: 50})
+
+
+//a function to set words
+function set_words(words_input){
+  
+  for (let i = 0; i < words_input.length; i++){
+    
+    if(i === words.length){
+      words.push({word: words_input[i], x: 50, y: 50})
+    }else{
+      words[i].word = words_input[i]
+    }
+  }
+  
+}
 
 //represents the word moving around the canvas being
 //animated using timer events
@@ -66,13 +82,32 @@ function getWordAtLocation(aCanvasX, aCanvasY) {
   }
   return null
 }
-
+function randomizeWordLocation(){
+  for (let i = 0; i < words.length; i++){
+    
+    let random_loc_wid = Math.floor(Math.random()*canvas.width)
+    let random_loc_hei = Math.floor(Math.random()*canvas.height)
+    if(random_loc_hei === canvas.height){
+      random_loc_hei = canvas.height - 10
+    }else if (random_loc_hei < 30){
+      random_loc_hei = 30
+    }
+    if (random_loc_wid > (canvas.width - 120)){
+      random_loc_wid = canvas.width - 120
+    }
+    words[i].x = random_loc_wid
+    words[i].y = random_loc_hei
+    
+  }
+}
+randomizeWordLocation()
 
 function drawCanvas() {
+  
   /*
   Call this function whenever the canvas needs to be redrawn.
   */
-
+  
   const context = canvas.getContext('2d')
 
   context.fillStyle = 'white'
@@ -83,7 +118,7 @@ function drawCanvas() {
   context.strokeStyle = 'blue'
 
   for (let i = 0; i < words.length; i++) {
-
+    
     let data = words[i]
     context.fillText(data.word, data.x, data.y)
     context.strokeText(data.word, data.x, data.y)
