@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('canvas1').addEventListener('mousedown', handleMouseDown)
   //add listener to submit button
   document.getElementById('submit_button').addEventListener('click', handleSubmitButton)
-
+  //add listern to submit fetch button 
+  document.getElementById('submit_button_with_fetch').addEventListener('click', handleSubmitButtonWithFetch)
   //add key handler for the document as a whole, not separate elements.
   document.addEventListener('keydown', handleKeyDown)
   document.addEventListener('keyup', handleKeyUp)

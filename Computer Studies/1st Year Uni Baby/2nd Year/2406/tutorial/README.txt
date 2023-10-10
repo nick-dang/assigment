@@ -1,0 +1,5 @@
+NAME: NICK DANG
+STUDENT #: 101286968
+LAUNCH INSTRUCTION: node server.js
+TESTING INSTRUCTION: http://localhost:3000/index.html
+DESCRIPTION: https://youtu.be/uIl8AcO2KDQ

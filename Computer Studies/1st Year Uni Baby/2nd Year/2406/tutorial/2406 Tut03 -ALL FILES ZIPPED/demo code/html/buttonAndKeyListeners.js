@@ -60,6 +60,10 @@ function handleSubmitButton() {
   let userText = document.getElementById('userTextField').value
   if (userText && userText != '') {
 
+    let textDiv = document.getElementById("text-area")
+    textDiv.innerHTML = textDiv.innerHTML + `<p> ${userText}</p>`    
+
+
     let userRequestObj = {text: userText}
     let userRequestJSON = JSON.stringify(userRequestObj)
     document.getElementById('userTextField').value = ''
@@ -72,7 +76,7 @@ function handleSubmitButton() {
         console.log("typeof: " + typeof this.responseText)
         //we are expecting the response text to be a JSON string
         let responseObj = JSON.parse(this.responseText)
-        console.log(responseObj.songLines)
+        
         song = responseObj.songLines
         
         
@@ -113,4 +117,67 @@ function handleSubmitButton() {
     xhttp.open("POST", "userText") //API .open(METHOD, URL)
     xhttp.send(userRequestJSON) //API .send(BODY)
   }
+}
+
+
+function handleSubmitButtonWithFetch(){
+  let userText = document.getElementById('userTextField').value
+  if (userText && userText != ''){
+    let userRequestObj = { text: userText}
+    let textDiv = document.getElementById("text-area")
+    textDiv.innerHTML = textDiv.innerHTML + `<p> ${userText}</p>` 
+  
+    fetch('userText', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userRequestObj),
+      
+    })
+    .then((response) => response.json())
+      
+    .then((data) => {
+      document.getElementById('userTextField').value = ''
+      song = data.songLines
+        
+      console.log("data: " + JSON.stringify(data))
+      console.log("typeof: " + typeof JSON.stringify(data))
+      if(data.text === "NOT FOUND: " + userText){
+        movingString.word = data.text
+      }else{
+        movingString.word = "FOUND"
+        let line = ''
+        let ch = ''
+        let word_store = []
+        for (let i = 0; i < song.length; i++){
+          line = song[i]
+          let space_index = 0
+          let start_index = 0
+          
+          for (let j = 0; j < line.length; j++){
+
+            ch = line.charAt(j)
+            if (ch === ' '){
+              space_index = j
+              word_store.push(line.substring(start_index, space_index))
+              start_index = j+1
+            }else if(j === line.length - 1){
+              word_store.push(line.substring(start_index))
+              
+            }
+          }
+        }
+        set_words(word_store)
+      }
+      drawCanvas()
+     
+    })
+    .catch((error) => {
+      console.error('ERROR:', error)
+    })
+  }
+ 
+
+  
 }

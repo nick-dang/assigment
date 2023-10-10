@@ -31,7 +31,6 @@ words.push({word: "javascript", x: 120, y: 50})
 
 //a function to set words
 function set_words(words_input){
-  
   for (let i = 0; i < words_input.length; i++){
     
     if(i === words.length){
@@ -40,7 +39,7 @@ function set_words(words_input){
       words[i].word = words_input[i]
     }
   }
-  
+  randomizeWordLocation()
 }
 
 //represents the word moving around the canvas being
@@ -75,13 +74,24 @@ function getWordAtLocation(aCanvasX, aCanvasY) {
 
   //note you will have to click near the start of the word
   //as it is implemented now
-  const TOLERANCE = 20;
+  let TOLERANCE = 0;
+  const height = 20
+  const context = canvas.getContext('2d')
+  
+  
   for (let i = 0; i < words.length; i++) {
-    if (Math.abs(words[i].x - aCanvasX) < TOLERANCE &&
-      Math.abs(words[i].y - aCanvasY) < TOLERANCE) return words[i]
+    TOLERANCE = context.measureText(words[i].word).width
+
+    if (Math.abs(aCanvasX - words[i].x) < TOLERANCE && (aCanvasY > words[i].y-height && aCanvasY < words[i].y )){
+      console.log("x:" + words[i].x + ", y:" + words[i].y )
+      console.log(TOLERANCE)
+      return words[i]
+    }  
+    
   }
   return null
 }
+
 function randomizeWordLocation(){
   for (let i = 0; i < words.length; i++){
     
