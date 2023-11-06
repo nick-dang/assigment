@@ -1,0 +1,5 @@
+NAME: NICK DANG
+STUDENT #: 101286968
+INSTALL INSTRUCTION: npm install
+LAUNCH INSTRUCTION: node server.js
+TESTING INSTRUCTIONS:http://localhost:3000/chatClient.html 

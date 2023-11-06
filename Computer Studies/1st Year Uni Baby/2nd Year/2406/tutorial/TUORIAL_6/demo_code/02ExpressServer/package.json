@@ -1,0 +1,15 @@
+{
+  "name": "02expressserver",
+  "version": "1.0.0",
+  "description": "my first express application",
+  "main": "02_express_static_server.js",
+  "scripts": {
+    "test": "node 02_express_static_server.js"
+  },
+  "author": "ldnel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  }
+}
